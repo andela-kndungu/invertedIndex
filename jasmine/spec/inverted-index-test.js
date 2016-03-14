@@ -53,4 +53,30 @@ describe('Populate index', function() {
 
     expect(invertedIndex.createIndex('books.json')).not.toEqual({});
   });
+
+  // Ensure keys map to correct object
+  describe('Proper mapping', function() {
+
+    // Object that holds the functions
+    var invertedIndex;
+
+    beforeEach(function() {
+
+      invertedIndex = new InvertedIndex();
+
+      // Load and parse JSON
+      objectArray = invertedIndex.createIndex('books.json');
+    });
+
+    /* Test key object matching */
+    it('maps Alice to first object', function() {
+
+      expect(invertedIndex.index[Alice.toLowerCase()]).toEqual([objectArray[0]]);
+    });
+
+    it('maps Lord to second object', function() {
+
+      expect(invertedIndex.index[Lord.toLowerCase()]).toEqual([objectArray[1]]);
+    });
+  });
 });
