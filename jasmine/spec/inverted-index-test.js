@@ -80,3 +80,31 @@ describe('Populate index', function() {
     });
   });
 });
+
+// Ensure search function returns the correct objects word is found in
+describe('Search index', function() {
+
+  // Object containing the functions
+  var invertedIndex;
+
+  // Array of the object to be indexed
+  var objectArray;
+
+  beforeEach(function() {
+
+    invertedIndex = new InvertedIndex();
+
+    // Load and parse JSON
+    objectArray = invertedIndex.createIndex('books.json');
+  });
+
+  it('finds "hole" in first object', function() {
+
+    expect(invertedIndex.searchIndex('hole')).toEqual(objectArray[0]);
+  });
+
+  it('finds "unusual" in second object', function() {
+
+    expect(invertedIndex.searchIndex('unusual')).toEqual(objectArray[1]);
+  });
+});
